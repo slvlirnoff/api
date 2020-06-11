@@ -7,11 +7,13 @@ module.exports = {
           'analyzer': 'peliasQuery',
           'query': 'k road',
           'boost': 1,
-          'type': 'phrase',
-          'slop': 3
+          'type': 'best_fields',
+          'minimum_should_match': '1<-1 3<-25%'
         }
-      }, {
-        'multi_match': {
+      }],
+      'should':[
+	{
+'multi_match': {
           'fields': [
             'parent.country.ngram^1',
             'parent.dependency.ngram^1',
@@ -31,9 +33,7 @@ module.exports = {
           'analyzer': 'peliasAdmin',
           'type': 'cross_fields'
         }
-      }],
-      'should':[
-        {
+},{
           'match': {
             'address_parts.street': {
               'query': 'k road',
@@ -44,6 +44,18 @@ module.exports = {
           }
         },
         {
+          "multi_match": {
+            "type": "phrase",
+            "query": "k road",
+            "fields": [
+              "phrase.default",
+              "phrase.en"
+            ],
+            "analyzer": "peliasQuery",
+            "boost": 1,
+            "slop": 3
+        }
+      }, {
         'function_score': {
           'query': {
             'match_all': {}

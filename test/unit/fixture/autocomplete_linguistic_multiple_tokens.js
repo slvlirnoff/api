@@ -5,10 +5,10 @@ module.exports = {
         'multi_match': {
           'fields': ['phrase.default', 'phrase.en'],
           'analyzer': 'peliasQuery',
-          'query': 'one two',
           'boost': 1,
-          'type': 'phrase',
-          'slop': 3
+          'type': 'best_fields',
+          'minimum_should_match': '1<-1 3<-25%',
+          'query': 'one two'
         }
       },
       {
@@ -37,9 +37,18 @@ module.exports = {
           }
         }
       }],
-      'should':[
+      'should':[{
+	  'multi_match': {
+            'fields': ['phrase.default', 'phrase.en'],
+            'analyzer': 'peliasQuery',
+            'query': 'one two',
+            'boost': 1,
+            'type': 'phrase',
+            'slop': 3
+          }
+        },
         {
-        'function_score': {
+          'function_score': {
           'query': {
             'match_all': {}
           },

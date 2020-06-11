@@ -6,12 +6,14 @@ module.exports = {
           'multi_match': {
             'fields': ['phrase.default', 'phrase.en'],
             'analyzer': 'peliasQuery',
-            'type': 'phrase',
-            'slop': 3,
+            'type': 'best_fields',
             'boost': 1,
+            'minimum_should_match': '1<-1 3<-25%',
             'query': 'one two'
           }
-        },
+        }
+      ],
+      'should': [
         {
           'multi_match': {
             'fields': [
@@ -33,9 +35,20 @@ module.exports = {
             'analyzer': 'peliasAdmin',
             'type': 'cross_fields'
           }
-        }
-      ],
-      'should': [
+        },
+	{
+          "multi_match": {
+            "type": "phrase",
+            "query": "one two",
+            "fields": [
+              "phrase.default",
+              "phrase.en"
+            ],
+            "analyzer": "peliasQuery",
+            "boost": 1,
+            "slop": 3
+          }
+        },
         {
           'function_score': {
             'query': {
