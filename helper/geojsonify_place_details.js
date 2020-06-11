@@ -56,7 +56,7 @@ const DETAILS_PROPS = [
   { name: 'marinearea_a',      type: 'string' },
   { name: 'bounding_box',      type: 'default' },
   { name: 'label',             type: 'string' },
-  { name: 'category',          type: 'array',     condition: checkCategoryParam }
+  { name: 'category',          type: 'array' }
 ];
 
 const EXTENDED_PROPS = DETAILS_PROPS.concat([
