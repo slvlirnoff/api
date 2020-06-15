@@ -11,6 +11,7 @@ function setup() {
 
     // capture the pre-sort order
     const presort_order = res.data.map(_.property('_id'));
+
     let input = req.query.text;
     let lower = _.toLower(input);
     let hasDiacritics = input.normalize('NFD').replace(/[\u0300-\u036f]/g, "") != input;
@@ -25,8 +26,8 @@ function setup() {
     });
 
     function sortByDiacritics(a, b) {
-    	let aParts = _.toLower(_.flatten((a.parent && [a.parent.country, a.parent.region, a.parent.county, a.parent.continent, a.parent.locality, a.parent.localadmin, a.name.default]) || a.name.default).join(" ")).replace(/,/g, "").split(" ");
-    	let bParts = _.toLower(_.flatten((b.parent && [b.parent.country, b.parent.region, b.parent.county, b.parent.continent, b.parent.locality, b.parent.localadmin, b.name.default]) || b.name.default).join(" ")).replace(/,/g, "").split(" ");
+    	let aParts = _.toLower(_.flatten(a.name.default).join(" ")).replace(/,/g, "").split(" ");
+    	let bParts = _.toLower(_.flatten(b.name.default).join(" ")).replace(/,/g, "").split(" ");
 
     	let aMatch = true;
     	let bMatch = true;
@@ -50,13 +51,10 @@ function setup() {
     	if(aMatch && !bMatch) {
     		return -1;
     	} else if(aMatch == bMatch) {
-    		return 0;
+    		return 0; //_.findIndex(presort_order, a._id) - _.findIndex(presort_order, b._id);
     	} else {
     		return 1;
     	}
-
-    	// Previous sort order
-    	return presort_order[a._id] - presort_order[b._id]
     }
 
 
