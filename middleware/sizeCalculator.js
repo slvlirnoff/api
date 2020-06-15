@@ -1,8 +1,8 @@
 var _ = require('lodash');
 
-var SIZE_PADDING = 2;
+var SIZE_PADDING = 2.5;
 
-var DEFAULT_MIN_QUERY_SIZE = 20;
+var DEFAULT_MIN_QUERY_SIZE = 25;
 
 /**
  * Utility for calculating query result size

@@ -25,7 +25,7 @@ module.exports.tests.valid = function(test, common) {
     setupQuery(0);
     const calcSize = calcSizeMiddleware();
     calcSize(req, {}, function () {
-      t.equal(req.clean.querySize, 20);
+      t.equal(req.clean.querySize, 25);
       t.end();
     });
   });
@@ -34,7 +34,7 @@ module.exports.tests.valid = function(test, common) {
     setupQuery(1);
     const calcSize = calcSizeMiddleware();
     calcSize(req, {}, function () {
-      t.equal(req.clean.querySize, 20);
+      t.equal(req.clean.querySize, 25);
       t.end();
     });
   });
@@ -43,7 +43,7 @@ module.exports.tests.valid = function(test, common) {
     setupQuery(10);
     const calcSize = calcSizeMiddleware();
     calcSize(req, {}, function () {
-      t.equal(req.clean.querySize, 20);
+      t.equal(req.clean.querySize, 25);
       t.end();
     });
   });
@@ -52,7 +52,7 @@ module.exports.tests.valid = function(test, common) {
     setupQuery(20);
     const calcSize = calcSizeMiddleware();
     calcSize(req, {}, function () {
-      t.equal(req.clean.querySize, 40);
+      t.equal(req.clean.querySize, 50);
       t.end();
     });
   });
@@ -79,7 +79,7 @@ module.exports.tests.valid = function(test, common) {
     setupQuery(5);
     const calcSize = calcSizeMiddleware(10);
     calcSize(req, {}, function () {
-      t.equal(req.clean.querySize, 10);
+      t.equal(req.clean.querySize, 12.5);
       t.end();
     });
   });
@@ -88,7 +88,7 @@ module.exports.tests.valid = function(test, common) {
     setupQuery(3);
     const calcSize = calcSizeMiddleware(2);
     calcSize(req, {}, function () {
-      t.equal(req.clean.querySize, 6);
+      t.equal(req.clean.querySize, 7.5);
       t.end();
     });
   });

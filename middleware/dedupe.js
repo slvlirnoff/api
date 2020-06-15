@@ -81,7 +81,7 @@ function dedupeResults(req, res, next) {
 
     // logging
     if (master !== place) {
-      logger.debug('[dupe][replacing]', {
+      logger.info('[dupe][replacing]', {
         query: req.clean.text,
         previous: formatLog(place),
         hit: formatLog(master)
